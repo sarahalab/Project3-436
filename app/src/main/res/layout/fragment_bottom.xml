@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/FrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BottomFragment">
+    android:fillViewport="true">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="wrap_content">
+
+        <!-- Guidelines to set consistent margins -->
+        <ImageView
+            android:id="@+id/ivCatPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvCatName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCatPic" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="38dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="38dp" />
+
+        <TextView
+            android:id="@+id/tvCatDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/guideLineRight"
+            app:layout_constraintStart_toStartOf="@+id/guideLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/tvCatName" />
+
+        <TextView
+            android:id="@+id/tvCatOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="4dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/tvCatTemp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideLineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/tvCatDescription" />
+
+        <TextView
+            android:id="@+id/tvCatTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="26dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/guideLineRight"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvCatOrigin"
+            app:layout_constraintTop_toBottomOf="@+id/tvCatDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
