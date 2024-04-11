@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 
 class BottomFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -19,6 +21,9 @@ class BottomFragment : Fragment() {
             view.findViewById<TextView>(R.id.tvCatDescription).text = details.description
             view.findViewById<TextView>(R.id.tvCatOrigin).text = details.origin
             view.findViewById<TextView>(R.id.tvCatTemp).text = details.temperament
+
+            val imageView = view.findViewById<ImageView>(R.id.ivCatPic)
+            Picasso.get().load(details.imageUrl).into(imageView)
         }
         return view
     }

@@ -15,7 +15,8 @@ data class CatBreedDetails(
     val name: String,
     val description: String,
     val origin: String,
-    val temperament: String
+    val temperament: String,
+    val imageUrl: String
 )
 class MainViewModel : ViewModel() {
     private val API_KEY = "live_TYkc2OW8IzzAOje48nZWK67hcPwEHw7Qgrqye2Ott1IPekGIbrM5JrgnJXmcXAyf"
@@ -52,11 +53,19 @@ class MainViewModel : ViewModel() {
         val queue = Volley.newRequestQueue(context)
         val request = StringRequest(Request.Method.GET, url, { response ->
             val jsonObject = JSONObject(response)
+            val imageId = jsonObject.optString("reference_image_id")
+            val imageUrl = if (imageId.isNotEmpty()) {
+                "https://cdn2.thecatapi.com/images/$imageId" + ".jpg"
+            } else {
+                // default image if cat images are not loading
+                "https://cdn1.vectorstock.com/i/1000x1000/31/20/image-error-icon-editable-outline-vector-30393120.jpg"
+            }
             val details = CatBreedDetails(
                 jsonObject.getString("name"),
                 jsonObject.getString("description"),
                 jsonObject.getString("origin"),
-                jsonObject.getString("temperament")
+                jsonObject.getString("temperament"),
+                imageUrl
             )
             _catDetails.value = details
         }, { error ->
