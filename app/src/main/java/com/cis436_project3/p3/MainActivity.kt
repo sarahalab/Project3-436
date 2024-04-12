@@ -1,14 +1,7 @@
 package com.cis436_project3.p3
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.cis436_project3.p3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,16 +15,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      binding.btnGetCatData?.setOnClickListener {
-          printCatData()
-      }
+
 
     }
-
-    fun printCatData() {
-
-    } //end printCatData
-
-
 
 }
