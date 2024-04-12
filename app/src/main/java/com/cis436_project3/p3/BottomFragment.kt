@@ -17,13 +17,18 @@ class BottomFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_bottom, container, false)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         viewModel.catDetails.observe(viewLifecycleOwner) { details ->
-            view.findViewById<TextView>(R.id.tvCatName).text = details.name
-            view.findViewById<TextView>(R.id.tvCatDescription).text = details.description
-            view.findViewById<TextView>(R.id.tvCatOrigin).text = details.origin
-            view.findViewById<TextView>(R.id.tvCatTemp).text = details.temperament
-
             val imageView = view.findViewById<ImageView>(R.id.ivCatPic)
             Picasso.get().load(details.imageUrl).into(imageView)
+            view.findViewById<TextView>(R.id.tvCatName).text = details.name
+            view.findViewById<TextView>(R.id.tvCatDescription).text = details.description
+            view.findViewById<TextView>(R.id.tvCatOrigin).text = buildString {
+        append("Origin: ")
+        append(details.origin)
+    }
+            view.findViewById<TextView>(R.id.tvCatTemp).text = buildString {
+        append("Temperament: ")
+        append(details.temperament)
+    }
         }
         return view
     }

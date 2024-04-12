@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
-import org.json.JSONObject
 
 data class CatBreedDetails(
     val name: String,
@@ -49,23 +49,16 @@ class MainViewModel : ViewModel() {
 
     fun fetchCatDetails(context: Context, breedName: String) {
         val breedId = breedIdMap[breedName] ?: return
-        val url = "https://api.thecatapi.com/v1/breeds/$breedId?api_key=$API_KEY"
+        val url = "https://api.thecatapi.com/v1/images/search?breed_id=${breedId}&api_key=$API_KEY"
         val queue = Volley.newRequestQueue(context)
-        val request = StringRequest(Request.Method.GET, url, { response ->
-            val jsonObject = JSONObject(response)
-            val imageId = jsonObject.optString("reference_image_id")
-            val imageUrl = if (imageId.isNotEmpty()) {
-                "https://cdn2.thecatapi.com/images/$imageId" + ".jpg"
-            } else {
-                // default image if cat images are not loading
-                "https://cdn1.vectorstock.com/i/1000x1000/31/20/image-error-icon-editable-outline-vector-30393120.jpg"
-            }
+        val request = JsonArrayRequest(Request.Method.GET, url,null, { response ->
+            val jsonObject = response.getJSONObject(0)
             val details = CatBreedDetails(
-                jsonObject.getString("name"),
-                jsonObject.getString("description"),
-                jsonObject.getString("origin"),
-                jsonObject.getString("temperament"),
-                imageUrl
+                jsonObject.getJSONArray("breeds").getJSONObject(0).getString("name"),
+                jsonObject.getJSONArray("breeds").getJSONObject(0).getString("description"),
+                jsonObject.getJSONArray("breeds").getJSONObject(0).getString("origin"),
+                jsonObject.getJSONArray("breeds").getJSONObject(0).getString("temperament"),
+                jsonObject.getString("url")
             )
             _catDetails.value = details
         }, { error ->
