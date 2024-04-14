@@ -7,9 +7,9 @@
 - Andrew: 
     - This README.md
     - API key
-    - (will fill when I start doing stuff)
+    - Got both jpg and png images loading
 - Sara:
     - initial Repo commit and setup
-    - (add your contributions here)
+    - Got jpg images loading
 - Nader Baaghil:
-    - (add your contributions here)
+    - Got all Textviews to display cat information
