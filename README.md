@@ -5,11 +5,13 @@
 
 ## What each team member did:
 - Andrew: 
-    - This README.md
     - API key
-    - Got both jpg and png images loading
+    - Helped with image loading
+    - Spinner element loaded with cat breeds.
 - Sara:
-    - initial Repo commit and setup
-    - Got jpg images loading
+    - Initial Repo commit and setup
+    - Image loading
+    - Project submission
 - Nader Baaghil:
     - Got all Textviews to display cat information
+    - Setup viewmodel approach
